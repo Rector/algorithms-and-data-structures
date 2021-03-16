@@ -5,10 +5,11 @@ public class MyArrayList<T extends Comparable<T>> {
     private int size;
     private int capacity;
     private final int DEFAULT_CAPACITY = 10;
+    private final float LOAD_FACTOR = 0.75F;
 
     public MyArrayList(int capacity) {
         if (capacity <= 0) {
-            throw new IllegalArgumentException("capacity <=0 " + capacity);
+            throw new IllegalArgumentException("capacity <= 0" + capacity);
         }
         this.capacity = capacity;
         list = (T[]) new Comparable[capacity];
@@ -19,15 +20,41 @@ public class MyArrayList<T extends Comparable<T>> {
         list = (T[]) new Comparable[capacity];
     }
 
+// 2. В коде доделать проверки в местах с комментариями
+
+    private void checkIndex(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException(String.format("Указанный индекс: %d - недопустим." +
+                    " Укажите индекс в пределах от 0 до %d.", index, size - 1));
+        }
+    }
+
+    private void checkLoadFactor(){
+        if(size > capacity * LOAD_FACTOR){
+            T[] updatedList = (T[]) new Comparable[capacity * 2];
+            System.arraycopy(list,0, updatedList, 0, list.length);
+            list = updatedList;
+        }
+    }
+
     public void add(T item) {
         // доделать проверку на превышение лоад фактора 0.75
+
+        checkLoadFactor();
         list[size] = item;
         size++;
     }
 
+
+
     public void add(int index, T item) {
         // доделать проверку на превышение лоад фактора 0.75
         // доделать проверку на допустимость индекса
+
+        checkLoadFactor();
+        checkIndex(index);
+
+
         for (int i = size; i > index; i--) {
             list[i] = list[i - 1];
         }
@@ -37,12 +64,16 @@ public class MyArrayList<T extends Comparable<T>> {
 
     public final T remove(int index) {
         // доделать проверку на допустимость индекса
+
+        checkIndex(index);
+
         T temp = list[index];
-        for (int i = index; i < size; i++) {
+        for (int i = index; i < size - 1; i++) {
             list[i] = list[i + 1];
         }
         size--;
         list[size] = null;
+
         return temp;
     }
 
@@ -66,16 +97,21 @@ public class MyArrayList<T extends Comparable<T>> {
 
     public T get(int index) {
         // доделать проверку на допустимость индекса
+
+        checkIndex(index);
+
         return list[index];
     }
 
     public void set(int index, T item) {
         // доделать проверку на допустимость индекса
 
+        checkIndex(index);
+
         list[index] = item;
     }
 
-    public int size() {
+    public int getSize() {
         return size;
     }
 
@@ -150,7 +186,7 @@ public class MyArrayList<T extends Comparable<T>> {
                     isSwap = true;
                 }
             }
-            if( !isSwap){
+            if (!isSwap) {
                 break;
             }
         }
