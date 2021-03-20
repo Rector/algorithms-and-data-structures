@@ -26,9 +26,13 @@ public class WorkWithStackAndQueue {
     }
 
     public static void main(String[] args){
-//        String str = "Я знаю, что ничего не знаю.";
-//        System.out.println(str);
-//        System.out.println(reversString(str));
+        String str = "Я знаю, что ничего не знаю.";
+        System.out.println(str);
+        System.out.println(reversString(str));
+
+/**
+ * 2. Создать класс для реализации дека.
+ * */
 
         MyDeque<Integer> md = new MyDeque<>(4);
 
@@ -54,8 +58,15 @@ public class WorkWithStackAndQueue {
 //            sb.append(md.removeRight()).append(" ");
         }
 
-
         System.out.println(sb.toString());
+
+
+        MyQueue<Integer> mq = new MyQueue<>(2);
+        mq.insert(10);
+        mq.insert(20);
+        mq.insert(30);
+
+        System.out.println(mq.toString());
 
     }
 

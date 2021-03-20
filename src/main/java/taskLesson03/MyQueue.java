@@ -37,8 +37,14 @@ public class MyQueue<T> {
      */
     public void insert(T item) throws IllegalStateException {
         if (isFull()) {
+/**
+ * 3*. Сделать возможность расширения внутреннего массива у стека и очереди.
+ * */
+            end = size;
+            capacity *= 2;
+            reCapacity(capacity);
             //реализовать расширение массива
-            throw new IllegalStateException("Очередь заполнена");
+//            throw new IllegalStateException("Очередь заполнена");
         }
         size++;
         list[end] = item;
@@ -91,5 +97,13 @@ public class MyQueue<T> {
         sb.append(" ]");
         return sb.toString();
     }
+
+    private void reCapacity(int newCapacity) {
+        T[] tempArr = (T[]) new Object[newCapacity];
+        System.arraycopy(list, 0, tempArr, 0, size);
+        list = tempArr;
+
+    }
+
 }
 

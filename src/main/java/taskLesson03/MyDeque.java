@@ -10,12 +10,6 @@ public class MyDeque<T> {
     private int begin;
     private int end;
 
-    //0 1 2 3 4
-    //b
-    //  e
-    //8
-
-
     public MyDeque(int capacity) throws IllegalArgumentException {
         if (capacity <= 0) {
             throw new IllegalArgumentException("capacity: " + capacity);
@@ -112,21 +106,5 @@ public class MyDeque<T> {
         }
 
     }
-
-//    @Override
-//    public String toString() {
-//        StringBuilder sb = new StringBuilder("[ ");
-//        int i = begin;
-//        while (i != end) {
-//            sb.append(list[i]).append(", ");
-//            i = nextIndex(i);
-//        }
-//        if (size > 0) {
-//            sb.setLength(sb.length() - 2);
-//        }
-//        sb.append(" ]");
-//        return sb.toString();
-//    }
-
 
 }
