@@ -1,7 +1,5 @@
 package taskLesson03;
 
-import java.util.Deque;
-
 public class WorkWithStackAndQueue {
 
 /**
@@ -46,15 +44,15 @@ public class WorkWithStackAndQueue {
 //        md.insertRight(10);
 //        md.insertRight(20);
 
-        md.insertRight(100);
-        md.insertRight(200);
-        md.insertLeft(10);
-        md.insertLeft(20);
+        md.insertFirst(100);
+        md.insertFirst(200);
+        md.insertLast(10);
+        md.insertLast(20);
 
 
         StringBuilder sb = new StringBuilder();
         while(md.size() != 0){
-            sb.append(md.removeLeft()).append(" ");
+            sb.append(md.removeFirst()).append(" ");
 //            sb.append(md.removeRight()).append(" ");
         }
 
@@ -64,7 +62,12 @@ public class WorkWithStackAndQueue {
         MyQueue<Integer> mq = new MyQueue<>(2);
         mq.insert(10);
         mq.insert(20);
-        mq.insert(30);
+        mq.insert(40);
+        System.out.println(mq.toString());
+        mq.remove();
+        mq.remove();
+        mq.insert(50);
+        mq.insert(60);
 
         System.out.println(mq.toString());
 

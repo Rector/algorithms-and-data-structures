@@ -23,9 +23,8 @@ public class MyDeque<T> {
         list = (T[]) new Object[capacity];
     }
 
-        public void insertLeft(T item) throws IllegalStateException {
+        public void insertLast(T item) throws IllegalStateException {
         if (isFull()) {
-            //реализовать расширение массива
             throw new IllegalStateException("Очередь заполнена");
         }
         size++;
@@ -34,9 +33,8 @@ public class MyDeque<T> {
 
     }
 
-    public void insertRight(T item) throws IllegalStateException {
+    public void insertFirst(T item) throws IllegalStateException {
         if (isFull()) {
-            //реализовать расширение массива
             throw new IllegalStateException("Очередь заполнена");
         }
         size++;
@@ -45,36 +43,31 @@ public class MyDeque<T> {
 
     }
 
-    public T peekLeft() {
+    public T peekFirst() {
         if (isEmpty()) {
             throw new NoSuchElementException();
         }
         return list[begin];
     }
 
-    public T peekRight() {
+    public T peekLast() {
         if (isEmpty()) {
             throw new NoSuchElementException();
         }
-        if(end > 0){
-            return list[end - 1];
-        } else{
-            return list[list.length - 1];
-        }
 
-
+        return list[previousIndex(end)];
     }
 
-    public T removeLeft() {
-        T temp = peekLeft();
+    public T removeFirst() {
+        T temp = peekFirst();
         size--;
         list[begin] = null;
         begin = nextIndex(begin);
         return temp;
     }
 
-    public T removeRight() {
-        T temp = peekRight();
+    public T removeLast() {
+        T temp = peekLast();
         size--;
         end = previousIndex(end);
         list[end] = null;
@@ -99,11 +92,7 @@ public class MyDeque<T> {
     }
 
     private int previousIndex(int index) {
-        if (index > 0) {
-            return (index - 1) % list.length;
-        } else {
-            return list.length - 1;
-        }
+        return (list.length + index - 1) % list.length;
 
     }
 
