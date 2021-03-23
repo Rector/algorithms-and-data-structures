@@ -39,6 +39,10 @@ public class MyLinkedListUpdated<T> implements Iterable<T> {
         Node anotherCurrentListIter;
         int index = 0;
 
+        /**
+         * 2*. Реализовать методы лист итератора.
+         * */
+
         @Override
         public boolean hasNext() {
             return currentListIter.getNext() != null;

@@ -34,6 +34,10 @@ public class WorkWithList {
         mllu.insertLast(200);
         mllu.insertLast(300);
 
+/**
+ * 3. В методе main проверить работу итератора и лист итератора
+ * */
+
         System.out.println("Тестирование Iterator");
         Iterator<Integer> iter = mllu.iterator();
         System.out.println(iter.hasNext());
