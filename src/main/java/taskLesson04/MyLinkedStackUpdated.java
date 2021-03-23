@@ -3,18 +3,23 @@ package taskLesson04;
 import taskLesson04.lessonCode.MyLinkedList;
 
 public class MyLinkedStackUpdated<T> {
+
+    /**
+     * 1. Реализовать классы стек и очередь на базе линкед листа.
+     */
+
     private MyLinkedList<T> ll = new MyLinkedList<>();
 
     public void push(T item){
-
-    }
-
-    public T peek(){
-        return null;
+        ll.insertFirst(item);
     }
 
     public T pop(){
-        return null;
+        return ll.removeFirst();
+    }
+
+    public T peek(){
+        return ll.getFirst();
     }
 
     public int size(){

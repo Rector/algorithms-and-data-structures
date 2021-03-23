@@ -35,43 +35,70 @@ public class MyLinkedListUpdated<T> implements Iterable<T> {
     }
 
     private class ListIter extends Iter implements ListIterator<T> {
+        Node currentListIter = new Node(null, null, first);
+        Node anotherCurrentListIter;
         int index = 0;
 
         @Override
+        public boolean hasNext() {
+            return currentListIter.getNext() != null;
+        }
+
+        @Override
+        public T next() {
+            currentListIter = currentListIter.getNext();
+            anotherCurrentListIter = currentListIter.getPrev();
+            index++;
+            return currentListIter.getValue();
+        }
+
+        @Override
         public boolean hasPrevious() {
-            return current.getPrev() != null;
+            return currentListIter.getPrev() != null;
         }
 
         @Override
         public T previous() {
-            return null;
+            currentListIter = currentListIter.getPrev();
+            anotherCurrentListIter = currentListIter.getNext();
+
+            index--;
+            return currentListIter.getValue();
         }
 
         @Override
         public int nextIndex() {
-            return 0;
+            return index;
         }
 
         @Override
         public int previousIndex() {
-            return 0;
+            return index - 1;
         }
 
-        //удаляет элемент который прошли методом next или prev
+        //удаляет элемент, который прошли методом next или prev
         @Override
         public void remove() {
-
+            if(anotherCurrentListIter == null){
+                throw new RuntimeException("Попытка удалить несуществующий элемент");
+            }
+            removeN(anotherCurrentListIter.getValue());
         }
-        //удаляет элементу который прошли методом next или prev
+
+        //изменяет элемент, который прошли методом next или prev
         @Override
         public void set(T t) {
-
+            if(anotherCurrentListIter == null){
+                throw new RuntimeException("Попытка установить значение несуществующему элементу");
+            }
+            anotherCurrentListIter.setValue(t);
         }
-        //добавить эелемент после элемента который прошли методом next или prev
+
+        //добавляет элемент после элемента, который прошли методом next или prev
         // в направлении куда шли.
         @Override
         public void add(T t) {
-
+            insert(indexOf(currentListIter.getNext().getValue()), t);
         }
     }
 
@@ -231,7 +258,7 @@ public class MyLinkedListUpdated<T> implements Iterable<T> {
         size++;
     }
 
-    public boolean remove(T item) {
+    public boolean removeN(T item) {
         if (isEmpty()) {
             return false;
         }
