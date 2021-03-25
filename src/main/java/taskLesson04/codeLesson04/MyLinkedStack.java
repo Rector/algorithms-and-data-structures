@@ -1,4 +1,4 @@
-package taskLesson04.lessonCode;
+package taskLesson04.codeLesson04;
 
 public class MyLinkedStack<T> {
     private MyLinkedList<T> ll = new MyLinkedList<>();

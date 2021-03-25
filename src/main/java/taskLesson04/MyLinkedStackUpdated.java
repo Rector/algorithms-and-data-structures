@@ -1,6 +1,6 @@
 package taskLesson04;
 
-import taskLesson04.lessonCode.MyLinkedList;
+import taskLesson04.codeLesson04.MyLinkedList;
 
 public class MyLinkedStackUpdated<T> {
 

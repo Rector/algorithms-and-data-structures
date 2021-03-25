@@ -1,8 +1,6 @@
 package taskLesson04;
 
-import taskLesson04.lessonCode.MyLinkedList;
-
-import java.util.NoSuchElementException;
+import taskLesson04.codeLesson04.MyLinkedList;
 
 public class MyLinkedQueue<T> {
 
