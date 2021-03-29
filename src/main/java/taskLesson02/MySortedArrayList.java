@@ -4,7 +4,7 @@ public class MySortedArrayList<T extends Comparable<T>> extends MyArrayList<T> {
     @Override
     public void add(T item) {
         int i = 0;
-        while (i < getSize() && get(i).compareTo(item) <= 0) {
+        while (i < size() && get(i).compareTo(item) <= 0) {
             i++;
         }
         super.add(i, item);
@@ -22,7 +22,7 @@ public class MySortedArrayList<T extends Comparable<T>> extends MyArrayList<T> {
 
     public int binaryIndexOf(T item) {
         int lo = 0;
-        int hi = getSize() - 1;
+        int hi = size() - 1;
 
         while (lo <= hi) {
             int mid = lo + (hi - lo) / 2;

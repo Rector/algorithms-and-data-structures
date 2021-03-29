@@ -57,6 +57,7 @@ public class WorkWithRecursion {
     }
 
     public static void main(String[] args) {
+        
         System.out.println(raisingNumberToDegree(2, 10));
 
 /**

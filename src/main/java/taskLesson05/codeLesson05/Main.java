@@ -10,7 +10,7 @@ public class Main {
 //        System.out.println(recFact(5));
 
 //        System.out.println(fibo(47));
-//        System.out.println(recFibo(10));
+//        System.out.println(recFibo(4));
 
 //        System.out.println(triangleNum(5));
 //        System.out.println(recTriangleNum(5));

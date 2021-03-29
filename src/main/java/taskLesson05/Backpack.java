@@ -16,9 +16,9 @@ public class Backpack {
 
     private ArrayList<Thing> al;
 
-    public Backpack(double backpackMaxСapacity){
+    public Backpack(double maxСapacity){
         al = new ArrayList<>();
-        this.maxСapacity = backpackMaxСapacity;
+        this.maxСapacity = maxСapacity;
         capacity = 0;
     }
 
