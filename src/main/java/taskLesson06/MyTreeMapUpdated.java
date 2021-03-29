@@ -4,7 +4,7 @@ import taskLesson06.codeLesson06.MyTreeMap;
 
 import java.util.NoSuchElementException;
 
-public class MyTreeMapUpdated <Key extends Comparable<Key>, Value> {
+public class MyTreeMapUpdated<Key extends Comparable<Key>, Value> {
     private Node root;
 
     private class Node {
@@ -14,10 +14,14 @@ public class MyTreeMapUpdated <Key extends Comparable<Key>, Value> {
         Node right;
         int size;
 
+        int height;
+
         public Node(Key key, Value value) {
             this.key = key;
             this.value = value;
             size = 1;
+
+            height = 0;
         }
     }
 
@@ -31,6 +35,78 @@ public class MyTreeMapUpdated <Key extends Comparable<Key>, Value> {
         }
         return node.size;
     }
+
+    public int height() {
+        return height(root);
+    }
+
+    private int height(Node node) {
+        if (node == null || node.left == null && node.right == null) {
+            return 0;
+        }
+        return node.height;
+    }
+
+    public int isBalanced() {
+        if (root.left == null && root.right == null) {
+            return 1;
+        }
+        return isBalanced(root);
+    }
+
+//    private int isBalanced(Node node) {
+//
+//        if (node.left != null && node.right == null) {
+//
+//            int currentLeft = isBalanced(node.left);
+//            if (currentLeft == 0) {
+//                return 0;
+//            }
+//        }
+//
+//        if (node.left == null && node.right != null) {
+//
+//            int currentRight = isBalanced(node.right);
+//            if (currentRight == 0) {
+//                return 0;
+//            }
+//        }
+//
+//        if (node.left != null && node.right != null) {
+//            int calculator = Math.abs(node.left.height - node.right.height);
+//            if (calculator > 1) {
+//                return 0;
+//            }
+//        }
+//
+//        if (node.left == null && node.right == null) {
+//            return 1;
+//        }
+//
+//        return 1;
+//    }
+
+    private int isBalanced(Node node) {
+
+
+        if (node.left != null && node.right == null) {
+           return isBalanced(node.left);
+        }
+        if (node.left == null && node.right != null) {
+            return isBalanced(node.right);
+        }
+        if(node.left == null && node.right == null) {
+            return 0;
+        }
+
+        int calculator = Math.abs(node.left.height - node.right.height);
+        if (calculator > 1) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
 
     public boolean isEmpty() {
         return root == null;
@@ -87,6 +163,9 @@ public class MyTreeMapUpdated <Key extends Comparable<Key>, Value> {
             node.right = put(node.right, key, value);
         }
         node.size = size(node.left) + size(node.right) + 1;
+
+        node.height = height(node.left) + height(node.right) + 1;
+
         return node;
     }
 
@@ -125,6 +204,9 @@ public class MyTreeMapUpdated <Key extends Comparable<Key>, Value> {
         }
         node.left = deleteMin(node.left);
         node.size = size(node.left) + size(node.right) + 1;
+
+        node.height = height(node.left) + height(node.right) + 1;
+
         return node;
     }
 
@@ -155,6 +237,9 @@ public class MyTreeMapUpdated <Key extends Comparable<Key>, Value> {
             node.left = temp.left;
         }
         node.size = size(node.left) + size(node.right) + 1;
+
+        node.height = height(node.left) + height(node.right) + 1;
+
         return node;
     }
 
@@ -171,4 +256,5 @@ public class MyTreeMapUpdated <Key extends Comparable<Key>, Value> {
                 node.key + " = " + node.value + " " +
                 toString(node.right);
     }
+
 }
