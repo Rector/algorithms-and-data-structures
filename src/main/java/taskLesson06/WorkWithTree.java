@@ -16,22 +16,19 @@ public class WorkWithTree {
  * */
 
         int limitTree = 200_000;
-        int limitHeight = 5;
+        int limitHeight = 6;
 
         int counterBalancedTree = 0;
 
         Random random = new Random();
-        int temp;
+        int temp = 0;
         for(int i = 0; i < limitTree;i++){
             MyTreeMapUpdated<Integer, String> mtmu = new MyTreeMapUpdated<>();
-            while(true){
-                if(mtmu.height() >= limitHeight){
-                    break;
-                }
+            while(mtmu.height() < limitHeight){
                 temp = random.nextInt(201) - 100;
                 mtmu.put(temp, "a");
             }
-
+            mtmu.delele(temp);
 /**
  * 2. Проанализировать, какой процент созданных деревьев
  * являются несбалансированными.
@@ -41,9 +38,12 @@ public class WorkWithTree {
             }
         }
 
-        double balance = 100 - (Double.valueOf(counterBalancedTree) / Double.valueOf(limitTree) * 100);
-        System.out.printf("Из %d деревьев - %d сбалансировано.\nПроцент несбалансированных деревьев - %.2f\n",
-                limitTree, counterBalancedTree, balance);
+        double balanced = Double.valueOf(counterBalancedTree) / Double.valueOf(limitTree) * 100;
+        double notBalanced = 100 - balanced;
+        System.out.printf("Из %d деревьев - %d сбалансировано." +
+                        "\nПроцент несбалансированных деревьев - %.2f\n" +
+                        "Процент сбалансированных деревьев - %.2f\n",
+                limitTree, counterBalancedTree, notBalanced, balanced);
 
     }
 }

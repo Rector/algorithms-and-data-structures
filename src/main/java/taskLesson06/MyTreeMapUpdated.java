@@ -42,36 +42,23 @@ public class MyTreeMapUpdated<Key extends Comparable<Key>, Value> {
         if (node == null || node.left == null && node.right == null) {
             return 0;
         }
-        return node.height;
+
+        return Math.max(height(node.left), height(node.right)) + 1;
     }
 
     public boolean isBalanced() {
-        if (root.left == null && root.right == null) {
-            return true;
-        }
         return isBalanced(root);
     }
 
 
     private boolean isBalanced(Node node) {
-
-        if (node.left != null && node.right == null) {
-           return isBalanced(node.left);
-        }
-        if (node.left == null && node.right != null) {
-            return isBalanced(node.right);
-        }
-
-        if(node == null || node.left == null && node.right == null){
+        if (node == null || node.left == null && node.right == null) {
             return true;
         }
 
-        int calculator = Math.abs(node.left.height - node.right.height);
-        if (calculator > 1) {
-            return false;
-        } else {
-            return true;
-        }
+        return Math.abs(height(node.left) - height(node.right)) <= 1
+                && isBalanced(node.left) && isBalanced(node.right);
+
     }
 
 
@@ -131,7 +118,7 @@ public class MyTreeMapUpdated<Key extends Comparable<Key>, Value> {
         }
         node.size = size(node.left) + size(node.right) + 1;
 
-        node.height = Math.max(height(node.left), height(node.right)) + 1;
+        node.height = height(node);
 
         return node;
     }
@@ -172,7 +159,7 @@ public class MyTreeMapUpdated<Key extends Comparable<Key>, Value> {
         node.left = deleteMin(node.left);
         node.size = size(node.left) + size(node.right) + 1;
 
-        node.height = Math.max(height(node.left), height(node.right)) + 1;
+        node.height = height(node);
 
         return node;
     }
@@ -205,7 +192,7 @@ public class MyTreeMapUpdated<Key extends Comparable<Key>, Value> {
         }
         node.size = size(node.left) + size(node.right) + 1;
 
-        node.height = Math.max(height(node.left), height(node.right)) + 1;
+        node.height = height(node);
 
         return node;
     }
