@@ -2,9 +2,11 @@ package taskLesson08;
 
 import java.util.LinkedList;
 
-public class ChainingHashMapUpdated <Key, Value> {
+public class ChainingHashMapUpdated<Key, Value> {
     private int capacity;
     private int size;
+
+    private final int DEFAULT_CAPACITY = 16;
 
     private LinkedList<Node>[] st;
 
@@ -13,6 +15,14 @@ public class ChainingHashMapUpdated <Key, Value> {
             throw new IllegalArgumentException();
         }
         this.capacity = capacity;
+        st = new LinkedList[capacity];
+        for (int i = 0; i < st.length; i++) {
+            st[i] = new LinkedList<>();
+        }
+    }
+
+    public ChainingHashMapUpdated() {
+        capacity = DEFAULT_CAPACITY;
         st = new LinkedList[capacity];
         for (int i = 0; i < st.length; i++) {
             st[i] = new LinkedList<>();
@@ -88,5 +98,34 @@ public class ChainingHashMapUpdated <Key, Value> {
         return sb.toString();
     }
 
-    //реализовать метод удаления.
+    public Key remove(Key key) {
+        checkKeyNotNull(key);
+        int h = hash(key);
+
+        for (int i = 0; i < st[h].size(); i++) {
+            Node node = st[h].get(i);
+            if (key.equals(node.key)) {
+                st[h].remove(i);
+                size--;
+                return key;
+            }
+        }
+        return null;
+    }
+
+/**
+ * 1. Реализовать удаление в методе цепочек.
+*/
+
+    public Key removeIf(Key key) {
+        checkKeyNotNull(key);
+        int h = hash(key);
+
+        if (st[h].removeIf(n -> n.key.equals(key))) {
+            size--;
+            return key;
+        }
+        return null;
+    }
+
 }

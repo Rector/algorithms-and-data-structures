@@ -41,7 +41,7 @@ public class LinearProbingHashMap<Key, Value> {
     }
 
     public void put(Key key, Value value){
-        // проверка на превышение лоад фактора. Либо бросаем эксепшн либо
+        // проверка на прввышение лоад фактора. Либо просаем эксепшн либо
         // перехиширование на массив размером больше, но простое число
         checkKeyNotNull(key);
         int i = hash(key);
